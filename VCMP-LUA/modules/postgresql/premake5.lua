@@ -35,4 +35,9 @@ project "PostgreSQL"
     filter "configurations:Release"
         runtime "Release"
         optimize "on"
+
+    filter { "system:windows", "configurations:Release*" }
+    local ok = pcall(function() linktimeoptimization "On" end)
+    if not ok then
         flags { "LinkTimeOptimization" }
+    end
