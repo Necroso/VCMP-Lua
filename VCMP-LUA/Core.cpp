@@ -34,9 +34,13 @@ extern "C" EXPORT unsigned int VcmpPluginInit(PluginFuncs* pluginFuncs, PluginCa
 	g_Calls = pluginCalls;
 	g_Info = pluginInfo;
 
-	pluginInfo->pluginVersion = 0x2600;
+	pluginInfo->pluginVersion = 0x2900;
 	pluginInfo->apiMajorVersion = PLUGIN_API_MAJOR;
 	pluginInfo->apiMinorVersion = PLUGIN_API_MINOR;
+
+	spdlog::info("[LuaPlugin] v{}.{}.{} initialized", (pluginInfo->pluginVersion >> 12) & 0xF, (pluginInfo->pluginVersion >> 8) & 0xF, (pluginInfo->pluginVersion >> 4) & 0xF);
+	spdlog::info("[LuaPlugin] Supported Lua runtime: {}", LUA_VERSION);
+	spdlog::info("[LuaPlugin] VCMP API version: {}.{}", PLUGIN_API_MAJOR, PLUGIN_API_MINOR);
 
 	CSimpleIni conf(false, true, false);
 	SI_Error ini_ret = conf.LoadFile("luaconfig.ini");
