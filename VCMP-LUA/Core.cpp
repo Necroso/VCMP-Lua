@@ -177,3 +177,8 @@ void LoadLuaModule(std::string name) {
 		break;
 	}
 }
+
+// This makes the Lua state visible to other plugins.
+extern "C" EXPORT lua_State* GetLuaState() {
+    return Lua.lua_state();
+}
